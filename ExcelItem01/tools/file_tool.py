@@ -1,7 +1,9 @@
+
 import os
 import openpyxl
 
 from config import base_path, cell_config
+import json
 
 
 class FileTool:
@@ -37,14 +39,15 @@ class FileTool:
                     data['params'] = self.sheet.cell(i, cell_config.get('params')).value
                     data['expect'] = self.sheet.cell(i, cell_config.get('expect')).value
                     # 记录每行数据的 行和列，执行完写入结果使用
-                    data['x_y'] = [i, cell_config.get("is_run")]
+                    data['x_y'] = [i, cell_config.get("is_run")]  # 读取表格中"is_run"的位置
                     # 将字典追加到列表
                     case.append(data)
                     # 将读取结果写入excel中
                     self.write_excel([i, cell_config.get("desc")], "数据读取完成")
                 except Exception as e:
                     self.write_excel([i, cell_config.get("desc")], e)
-        # 3、将列表数据写入json
+        # 3.将列表数据写入json
+        self.write_json(case, "case.json")
         print("读取列表数据为：", case)
 
     # 3、写入Excel
@@ -60,15 +63,20 @@ class FileTool:
             self.workbook.save(self.filename)
 
     # 4、读取Json
-    def read_json(self):
-        pass
+    def read_json(self, file_name='case.json'):
+        file_name = base_path + os.sep + "data" + os.sep + file_name
+        with open(file_name, "r", encoding="utf-8") as f:
+            return json.load(f)
 
     # 5、写入Json
-    def write_json(self):
-        pass
-        print("dddd")
+    def write_json(self,case,file_name):
+        file_name = base_path + os.sep + "data" + os.sep + file_name
+        with open(file_name,"w",encoding="utf-8") as f:
+            json.dump(case,f,indent=4,ensure_ascii=False)  # ensure_ascii为假，则不转义中文字符
 
 
 if __name__ == '__main__':
     d = FileTool('Case01.xlsx')
     d.read_excel()
+    # d.write_excel([3, 6], "POST")  # 把表格里的第3行6列的值改成POST
+    print(d.read_json()) # 已默认传入参数

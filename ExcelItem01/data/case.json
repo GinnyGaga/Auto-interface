@@ -1,0 +1,26 @@
+[
+    {
+        "path": "https://www.baidu.com/",
+        "method": "get",
+        "headers": "{'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'}",
+        "param_type": "json",
+        "params": "{“mobile”:\"1234\",\"pwd\":\"1111\"}",
+        "expect": "{\"code\":200,\"msg\":\"操作成功\"}",
+        "x_y": [
+            2,
+            11
+        ]
+    },
+    {
+        "path": "https://www.baidu.com/",
+        "method": "get",
+        "headers": "{'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.38', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'}",
+        "param_type": "json",
+        "params": "{“mobile”:\"1234\",\"pwd\":\"1113\"}",
+        "expect": "{\"code\":200,\"msg\":\"操作成功\"}",
+        "x_y": [
+            4,
+            11
+        ]
+    }
+]
