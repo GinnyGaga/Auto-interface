@@ -9,7 +9,7 @@ import json
 class FileTool:
     # 1、初始化
     def __init__(self, filename):
-        # 1、动态文件路径
+        # 1、动态文件路径  os.sep根据你所处的平台，自动采用相应的分隔符号
         self.filename = base_path + os.sep + 'data' + os.sep + filename
         print('要打开的文件为：', self.filename)
         # 2、打开文件，获取workbook对象
