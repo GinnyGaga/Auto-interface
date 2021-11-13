@@ -1,10 +1,12 @@
 from config import host
 import requests
+from tools.get_log import GetLog
+log = GetLog.get_logger()
 
 
 class Api:
     # 1、初始化
-    def __init__(self,case):
+    def __init__(self, case):
         # 1、提取 url = host+path
         self.url = host + case.get("path")
         # 2、请求方法
@@ -18,10 +20,12 @@ class Api:
 
     # 2、查询方法
     def _get(self):
-        return requests.get(url=self.url,params=self.params,headers=self.headers)
+        log.info("正在调用 get请求方法")
+        return requests.get(url=self.url, params=self.params, headers=self.headers)
 
     # 3、新增方法
     def _post(self):
+        log.info("正在调用 post请求方法")
         # 判断参数类型是json还是data
         if self.param_type == "json":
             return requests.post(url=self.url, json=self.params, headers=self.headers)
@@ -30,14 +34,17 @@ class Api:
 
     # 4、更新方法
     def _put(self):
-        return requests.put(url=self.url,json=self.params,headers=self.headers)
+        log.info("正在调用 put请求方法")
+        return requests.put(url=self.url, json=self.params, headers=self.headers)
 
     # 5、删除方法
     def _delete(self):
-        return requests.delete(url=self.url,params=self.params,headers=self.headers)
+        log.info("正在调用 delete请求方法")
+        return requests.delete(url=self.url, params=self.params, headers=self.headers)
 
     # 6、调用运行方法
     def run_method(self):
+        log.info("正在调用 运行接口方法")
         if self.method == "get":
             return self._get()
         elif self.method == "post":
@@ -46,5 +53,3 @@ class Api:
             return self._post()
         elif self.method == "delete":
             return self._delete()
-
-

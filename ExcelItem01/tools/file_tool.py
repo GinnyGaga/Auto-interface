@@ -29,6 +29,7 @@ class FileTool:
             # 新建空字典（存储每行数据）
             data = dict()
             # 判断是否执行
+            # if self.sheet.cell(i, cell_config.get("result")).value == "是":
             if self.sheet.cell(i, cell_config.get("is_run")).value == "是":
                 # 读取数据 追加到字典
                 try:
